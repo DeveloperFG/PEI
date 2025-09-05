@@ -3,61 +3,73 @@ body, html, #root {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background-color: #f8fafc; /* bg-slate-50 */
+  background-color: #f8fafc;
   min-height: 100vh;
+  box-sizing: border-box;
 }
 
+/* Container principal */
 .app-container {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 24px;
+  padding: 16px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Centralizar no desktop */
 @media (min-width: 1024px) {
   .app-container {
     min-height: 100vh;
-    align-items: center; /* centraliza também no vertical */
+    align-items: center;
+    padding: 24px;
   }
 }
 
+/* Wrapper do formulário */
 .form-wrapper {
   background: #fff;
   max-width: 900px;
   width: 100%;
-  padding: 32px;
+  padding: 24px;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
+/* Título */
 .title {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
-  color: #1e293b; /* slate-800 */
-  margin-bottom: 24px;
+  color: #1e293b;
+  margin-bottom: 20px;
   font-family: serif;
 }
 
+/* Formulário */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
+/* Grid */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
+/* Campos */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -67,27 +79,30 @@ label {
   margin-bottom: 8px;
   font-size: 0.9rem;
   font-weight: 500;
-  color: #475569; /* slate-600 */
+  color: #475569;
 }
 
 input, textarea {
   padding: 12px;
-  border: 1px solid #cbd5e1; /* slate-300 */
+  border: 1px solid #cbd5e1;
   border-radius: 6px;
   font-size: 1rem;
   outline: none;
   transition: border 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 input:focus, textarea:focus {
-  border-color: #0ea5e9; /* sky-500 */
-  box-shadow: 0 0 0 2px #38bdf8; /* focus:ring-sky-500 */
+  border-color: #0ea5e9;
+  box-shadow: 0 0 0 2px #38bdf8;
 }
 
+/* Botão principal */
 .btn-primary {
   width: 100%;
   padding: 12px 24px;
-  background: #0284c7; /* sky-600 */
+  background: #0284c7;
   color: white;
   font-weight: 600;
   border: none;
@@ -98,22 +113,26 @@ input:focus, textarea:focus {
 }
 
 .btn-primary:hover {
-  background: #0369a1; /* sky-700 */
+  background: #0369a1;
 }
 
 .btn-primary:disabled {
-  background: #7dd3fc; /* sky-300 */
+  background: #7dd3fc;
   cursor: not-allowed;
 }
 
+/* Caixa de resultado */
 .result-box {
-  margin-top: 32px;
-  padding: 24px;
-  background: #f1f5f9; /* slate-100 */
+  margin-top: 24px;
+  padding: 20px;
+  background: #f1f5f9;
   border-radius: 12px;
   box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
+/* Erro */
 .error {
   padding: 12px;
   background: #fee2e2;
@@ -122,24 +141,63 @@ input:focus, textarea:focus {
   font-size: 0.9rem;
 }
 
+/* Título do resultado */
 .result-title {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
   color: #0369a1;
   text-align: center;
   margin-bottom: 16px;
 }
 
+/* Conteúdo do resultado */
 .pei-content {
   color: #334155;
   line-height: 1.6;
+  margin: 0 8px; /* margem lateral */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
+.pei-content h2, 
+.pei-content h3, 
+.pei-content h4 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: #1e293b;
+}
+
+.pei-content ul, 
+.pei-content ol {
+  margin: 8px 0 8px 20px;
+  padding: 0;
+}
+
+.pei-content li {
+  margin-bottom: 6px;
+}
+
+.pei-content code, 
+.pei-content pre {
+  background: #e2e8f0;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  white-space: pre-wrap;  /* força quebra */
+  word-break: break-word;
+  display: block;
+  margin: 8px 0;
+}
+
+/* Ações */
 .actions {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 24px;
+  margin-top: 20px;
+  flex-wrap: wrap;
 }
 
 .btn-secondary {
@@ -172,6 +230,7 @@ input:focus, textarea:focus {
   background: #15803d;
 }
 
+/* Placeholder */
 .placeholder {
   text-align: center;
   color: #64748b;
