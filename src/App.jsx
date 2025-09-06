@@ -53,32 +53,60 @@ Responda apenas no formato Markdown.
     `;
   };
 
-  const generatePEI = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
+  // const generatePEI = async (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //   setError(null);
 
-    try {
-      const { GoogleGenerativeAI } = await import("@google/generative-ai");
-      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+  //   try {
+  //     const { GoogleGenerativeAI } = await import("@google/generative-ai");
+  //     const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
 
-      const model = genAI.getGenerativeModel({
-        model: "gemini-2.0-flash",
-      });
+  //     const model = genAI.getGenerativeModel({
+  //       model: "gemini-2.0-flash",
+  //     });
 
-      const result = await model.generateContent(buildPrompt());
-      const response = await result.response;
-      const text = response.text();
+  //     const result = await model.generateContent(buildPrompt());
+  //     const response = await result.response;
+  //     const text = response.text();
 
-      if (text) setPeiContent(text);
-      else setError("Não foi possível gerar o PEI.");
-    } catch (err) {
-      console.error("Erro ao gerar o PEI:", err);
-      setError("Ocorreu um erro. Verifique sua conexão.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  //     if (text) setPeiContent(text);
+  //     else setError("Não foi possível gerar o PEI.");
+  //   } catch (err) {
+  //     console.error("Erro ao gerar o PEI:", err);
+  //     setError("Ocorreu um erro. Verifique sua conexão.");
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
+const generatePEI = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  setError(null);
+
+  try {
+    // agora chamamos a rota serverless
+    const response = await fetch("/api/gemini", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: buildPrompt() }),
+    });
+
+    const data = await response.json();
+
+    // pega o texto estruturado da resposta
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+
+    if (text) setPeiContent(text);
+    else setError("Não foi possível gerar o PEI.");
+  } catch (err) {
+    console.error("Erro ao gerar o PEI:", err);
+    setError("Ocorreu um erro. Verifique sua conexão.");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const copyToClipboard = () => {
     if (peiContent) {
