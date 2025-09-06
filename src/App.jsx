@@ -78,34 +78,6 @@ Responda apenas no formato Markdown.
   }
 };
 
-// const generatePEI = async (e) => {
-//   e.preventDefault();
-//   setIsLoading(true);
-//   setError(null);
-
-//   try {
-//     // agora chamamos a rota serverless
-//     const response = await fetch("/api/gemini", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ prompt: buildPrompt() }),
-//     });
-
-//     const data = await response.json();
-
-//     // pega o texto estruturado da resposta
-//     const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
-
-//     if (text) setPeiContent(text);
-//     else setError("Não foi possível gerar o PEI.");
-//   } catch (err) {
-//     console.error("Erro ao gerar o PEI:", err);
-//     setError("Ocorreu um erro. Verifique sua conexão.");
-//   } finally {
-//     setIsLoading(false);
-//   }
-// };
-
   const copyToClipboard = () => {
     if (peiContent) {
       navigator.clipboard.writeText(peiContent);
