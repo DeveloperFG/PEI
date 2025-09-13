@@ -36,7 +36,7 @@ export default function PEIApp() {
     }));
   };
 
-  const buildPrompt = () => {
+ const buildPrompt = () => {
     return `
 Você é um especialista em Educação Inclusiva. 
 Crie um **Plano Educacional Individualizado (PEI)** completo, bem estruturado e formatado em **Markdown** com os seguintes dados:
@@ -65,31 +65,29 @@ Responda apenas no formato Markdown.
   };
 
   const generatePEI = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError(null);
+  e.preventDefault();
+  setIsLoading(true);
+  setError(null);
 
-    try {
-      const { GoogleGenerativeAI } = await import("@google/generative-ai");
-      const genAI = new GoogleGenerativeAI(import.meta.env.GOOGLE_API_KEY);
+  try {
+    const response = await fetch("/api/gemini", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: buildPrompt() }),
+    });
 
-      const model = genAI.getGenerativeModel({
-        model: "gemini-2.0-flash",
-      });
+    const data = await response.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
-      const result = await model.generateContent(buildPrompt());
-      const response = await result.response;
-      const text = response.text();
-
-      if (text) setPeiContent(text);
-      else setError("Não foi possível gerar o PEI.");
-    } catch (err) {
-      console.error("Erro ao gerar o PEI:", err);
-      setError("Ocorreu um erro. Verifique sua conexão.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    if (text) setPeiContent(text);
+    else setError("Não foi possível gerar o PEI.");
+  } catch (err) {
+    console.error("Erro ao gerar o PEI:", err);
+    setError("Ocorreu um erro. Verifique sua conexão.");
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   const copyToClipboard = () => {
     if (peiContent) {
