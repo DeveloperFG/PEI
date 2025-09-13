@@ -1,0 +1,51 @@
+.alert-bar {
+  position: fixed;
+  top: 0; /* pode trocar para bottom:0 se quiser embaixo */
+  left: 0;
+  width: 100%;
+  padding: 12px;
+  text-align: center;
+  font-weight: 500;
+  /* color: #fff; */
+  z-index: 9999;
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Tipos */
+.alert-bar.info {
+  background: #3498db;
+  color: #fff;
+}
+.alert-bar.success {
+  background: #27ae60;
+  color: #fff;
+}
+.alert-bar.error {
+  background: #e74c3c;
+  color: #fff;
+}
+.alert-bar.warning {
+  background: #f39c12;
+  color: #fff;
+}
+
+/* Progress bar */
+.alert-bar .progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.8);
+  width: 100%;
+  animation: shrink linear forwards;
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(0); }
+}
+
+@keyframes shrink {
+  from { width: 100%; }
+  to   { width: 0; }
+}
