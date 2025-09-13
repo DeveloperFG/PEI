@@ -3,7 +3,7 @@ import firebase from '../firebase/db';
 import { UserContext } from '../context/userContext';
 import { useNavigate } from "react-router-dom";
 import Load from "../components/Load";
-import AlertBar from "../components/Alert";
+import AlertBar from "../components/AlertBar";
 import "../App.css";
 
 import { useAlert } from "../context/alertContext";

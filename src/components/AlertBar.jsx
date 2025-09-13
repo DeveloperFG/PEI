@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./alertbar.css";
+import "./alertBar.css";
 
 export default function AlertBar({ message, type = "info", duration = 3000, onClose }) {
   const [visible, setVisible] = useState(true);

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useCallback } from "react";
-import AlertBar from "../components/Alert";
+import AlertBar from "../components/AlertBar";
 
 const AlertContext = createContext();
 
